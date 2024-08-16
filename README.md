@@ -2,11 +2,14 @@
 
 
 ## Requirements and Installation
+In the case of a batch size of 8, it is best to use a GPU with more than 12GB of VRAM. 
+With an epoch count of 60, the RTX 4090 requires approximately 10 hours for continuous training on four datasets.
 We recommended the following dependencies.
 *  Python 3.7
 *  PyTorch 1.13.0
 *  Torchvision 0.14.0
 *  Tqdm 4.66.2
+
 
 ## Before Training
 Download the datasets, the path to get four datasets are below:
