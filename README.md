@@ -9,24 +9,30 @@ We recommended the following dependencies.
 *  Tqdm 4.66.2
 
 ## Before Training
+Download the datasets, the path to get four datasets are below:
+RegDB: http://dm.dongguk.edu/link.html or https://paperswithcode.com/dataset/regdb
+SYSU-MM01: https://github.com/wuancong/SYSU-MM01
+LLCM: https://github.com/ZYK100/LLCM
+HITSZ-VCM: https://github.com/VCM-project233/HITSZ-VCM-data 
+
 Prepare the training and testing data. The folder structure should be:
 ```
 Datasets
 └─── RegDB
- |	├─── idx
- |	├─── Thermal
- |	└─── Visible
+|	├─── idx
+|	├─── Thermal
+|	└─── Visible
 └─── SYSU-MM01
- |	├─── exp
- |	├─── cam1
- |	├─── cam2
- |	└─── ......
+|	├─── exp
+|	├─── cam1
+|	├─── cam2
+|	└─── ......
 └─── LLCM
- |	├─── idx
- |	├─── vis
- |	└─── nir
- |	├─── test_vis
- |	└─── test_nir
+|	├─── idx
+|	├─── vis
+|	└─── nir
+|	├─── test_vis
+|	└─── test_nir
 └─── VCM
 	├─── info
 	├─── Train
@@ -34,7 +40,7 @@ Datasets
 ```
 The 'Datasets' folder contains four datasets,  while the internal directory of each dataset is not modified.
 
-Then, run preprocess programs to preprocess the images in SYSU-MM01, LLCM and VCM (The short name of HISTZ_VCM).
+Then, run preprocess programs to preprocess the images in SYSU-MM01, LLCM and VCM (The short name of HITSZ_VCM).
 ```
 python pre_process_sysu.py 	--datasets_path '/my-tmp/Datasets/' 
 python pre_process_llcm.py 	--datasets_path '/my-tmp/Datasets/' 
