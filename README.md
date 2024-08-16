@@ -51,17 +51,17 @@ python pre_process_vcm.py 	--datasets_path '/my-tmp/Datasets/'
 
 ## Training
 
-To train LVIReID, run the training script below.
+To train DMM_CDCN, run the training script below.
 ```
 python main.py \
 	--total_epoch 60 \
 	--test_frequency 10 \
 	--batch_size 8 \
 	--train_datasets  'regdb' 'sysu' 'llcm' 'vcm'  \
-	--log_path '/my-tmp/log/' \
-	--model_path '/my-tmp/log/best_model/' \
-	--vis_log_path '/my-tmp/log/vis_log/' \
-	--datasets_path '/my-tmp/Datasets/' \
+	--log_path '/log/' \
+	--model_path '/log/best_model/' \
+	--vis_log_path '/log/vis_log/' \
+	--datasets_path '/Datasets/' \
 	--ex_name 'Experment 1' \
 	--test_mode 'vti' \
 	--lr 0.1 \
@@ -75,15 +75,15 @@ python main.py \
 
 ## Testing
 
-To test LVIReID, run the testing script below. Notably, only the trained dataset can be tested because the model should know the information of cameras in the domain, and the order of testing datasets should be the same as training, the final metricses (except R-1 and mAP) are processed using other tools.
+To test DMM_CDCN, run the testing script below. Notably, only the trained dataset can be tested because the model should know the information of cameras in the domain, and the order of testing datasets should be the same as training, the final metricses (except R-1 and mAP) are processed using other tools.
 ```
 python main.py \
 	--test_datasets 'regdb' 'sysu' 'llcm' 'vcm' \
-	--log_path '/my-tmp/log/' \
-	--model_path '/my-tmp/log/best_model/' \
-	--vis_log_path '/my-tmp/log/vis_log/' \
-	--datasets_path '/my-tmp/Datasets/' \
-	--resume '/my-tmp/log/my-net/LVIReID_Net_GPU0.pth' \
+	--log_path '/log/' \
+	--model_path '/log/best_model/' \
+	--vis_log_path '/log/vis_log/' \
+	--datasets_path '/Datasets/' \
+	--resume '/Resume/DM_CNCN_GPU0.pth' \
 	--lr 0.1 \
 	--test_only 't' \
 	--debug 't' \
