@@ -6,13 +6,26 @@ from tqdm import tqdm
 
 
 class CAJRegDBData(Dataset):  # 64*128
-    def __init__(self, data_dir, trial, max_pid, transform=None):
+    def __init__(self, data_dir, trial, max_pid, transform=None, tsne='f'):
         # Load training images (path) and labels
-        train_rgb_list = data_dir + 'idx/train_visible_{}'.format(trial) + '.txt'
-        train_ir_list = data_dir + 'idx/train_thermal_{}'.format(trial) + '.txt'
+        if tsne == 'f':
+            train_rgb_list = data_dir + 'idx/train_visible_{}'.format(trial) + '.txt'
+            train_ir_list = data_dir + 'idx/train_thermal_{}'.format(trial) + '.txt'
 
-        rgb_img_file, train_rgb_label = self.load_data(train_rgb_list, max_pid)
-        ir_img_file, train_ir_label = self.load_data(train_ir_list, max_pid)
+            rgb_img_file, train_rgb_label = self.load_data(train_rgb_list, max_pid)
+            ir_img_file, train_ir_label = self.load_data(train_ir_list, max_pid)
+        else:
+            rgb_img_file, train_rgb_label = [], []
+            ir_img_file, train_ir_label = [], []
+            for trial in range(1, 11):
+                train_rgb_list = data_dir + 'idx/train_visible_{}.txt'.format(trial)
+                train_ir_list = data_dir + 'idx/train_thermal_{}.txt'.format(trial)
+                rgb_img_file_trial, train_rgb_label_trial = self.load_data(train_rgb_list, max_pid)
+                ir_img_file_trial, train_ir_label_trial = self.load_data(train_ir_list, max_pid)
+                rgb_img_file.extend(rgb_img_file_trial)
+                train_rgb_label.extend(train_rgb_label_trial)
+                ir_img_file.extend(ir_img_file_trial)
+                train_ir_label.extend(train_ir_label_trial)
 
         train_rgb_image = []
         for i in range(len(rgb_img_file)):

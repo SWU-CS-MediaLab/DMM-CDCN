@@ -139,8 +139,9 @@ class Trainer:
                     # print('iti modal')
                     feat, new_logit = self.learner_net(input2, input2, modal=2)
             else:
-                labels = torch.cat((label1, label2), 0).cuda()
+                # labels = torch.cat((label1, label2), 0).cuda()
                 feat, new_logit = self.learner_net(input1, input2)
+            # print('shape:', feat.shape, new_logit.shape, labels.shape)
             loss_id = self.criterion_id(new_logit, labels)
             loss_tri = self.criterion_tri(feat, labels)[0]
             loss = loss_id + loss_tri

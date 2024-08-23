@@ -54,7 +54,7 @@ if args.resume != '':
     if args.next_step == 't':
         start_step += 1
         start_epoch = 0
-    if args.joint_learning == 't' and args.tsne == 't':
+    if args.joint_learning == 't' or args.tsne == 't':
         start_step = 4
     print('Start Step:', start_step)
     test_dataset = []

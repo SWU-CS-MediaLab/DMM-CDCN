@@ -1,7 +1,7 @@
 from __future__ import print_function
 import psutil
 from torch.utils.data import DataLoader
-from Apreprocess.ChannelAug import *
+from torchvision.transforms import *
 from train_data_loader import *
 from test_data_loader import *
 from train_data_loader_caj import *
@@ -121,7 +121,7 @@ class Incremental_Datasets(object):
             elif dataset == 'regdb':
                 # training set
                 if args.caj == 't':
-                    trainset = CAJRegDBData(data_path, args.trial, transform=self.transform_train, max_pid=self.max_pid)
+                    trainset = CAJRegDBData(data_path, args.trial, transform=self.transform_train, max_pid=self.max_pid, tsne=args.tsne)
                 else:
                     trainset = RegDBData(data_path, args.trial, transform=self.transform_train, max_pid=self.max_pid)
                 rgb_pos, infrared_pos = GenIdx(trainset.train_rgb_label, trainset.train_ir_label)
@@ -629,12 +629,12 @@ class CAJ_Replay_PCB_Dataset(object):
 class SNEDatasets(Dataset):
     def __init__(self, trainset=None, modal='rgb', transform=None):
         if modal == 'rgb':
-            indexs = np.random.choice(range(len(trainset.train_rgb_label)), min(len(trainset.train_ir_label), 1024), replace=False)
+            indexs = np.random.choice(range(len(trainset.train_rgb_label)), min(len(trainset.train_ir_label), 8192), replace=False)
             self.train_image = [trainset.train_rgb_image[idx] for idx in indexs]
             self.train_label = [trainset.train_rgb_label[idx] for idx in indexs]
             self.train_cam = [trainset.train_rgb_cam[idx] for idx in indexs]
         else:
-            indexs = np.random.choice(range(len(trainset.train_ir_label)), min(len(trainset.train_ir_label), 1024), replace=False)
+            indexs = np.random.choice(range(len(trainset.train_ir_label)), min(len(trainset.train_ir_label), 8192), replace=False)
             self.train_image = [trainset.train_ir_image[idx] for idx in indexs]
             self.train_label = [trainset.train_ir_label[idx] for idx in indexs]
             self.train_cam = [trainset.train_ir_cam[idx] for idx in indexs]
